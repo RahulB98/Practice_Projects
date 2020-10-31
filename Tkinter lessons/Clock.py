@@ -16,7 +16,6 @@ def clock():
 
     time_label.config(text=hour + ":" + minute + ":" + second + am_pm)
     time_label.after(1000, clock)
-
     day_label.config(text=time_zone + ", " +day)
 
 time_label = Label(root, text="", font=("helvetica", 48), fg="green", bg="black")
