@@ -13,4 +13,5 @@ soup = BeautifulSoup(link, 'html.parser')
 
 tags = soup('td')
 for tag in tags:
-    print(tag.get('class', None))
+    if tag.get('class') == ['a-span12']:
+        print(tag)
