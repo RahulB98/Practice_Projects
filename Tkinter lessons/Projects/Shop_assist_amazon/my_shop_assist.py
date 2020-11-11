@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import ssl
 import pandas as pd
 import time
+import csv
 
 def get_price(row, url):
     # Ignore SSL certificate errors
@@ -10,7 +11,7 @@ def get_price(row, url):
     ctx.check_hostname = False
     ctx.verify_mode = ssl.CERT_NONE
 
-    lookup_time = time.now().strftime('%Y-%m-%d %Hh%Mm')
+    lookup_time = time.strftime('%Y-%m-%d %Hh%Mm')
 
     link = urllib.request.urlopen(url).read()
     soup = BeautifulSoup(link, 'html.parser')
@@ -32,12 +33,24 @@ def get_price(row, url):
                 price = soup.find(id="priceblock_saleprice").get_text().split()
             except:
                 price = ''
-                print("Cannot find price")
     article_title = " ".join(title)
-    article_price = float(price[1].replace(",", ""))
-    if article_price <= file.desired_price[row]:
-        print("*****BUY NOW: " + article_title + " ************")
-    print(article_title, ": ", article_price)
+    try:
+        article_price = float(price[1].replace(",", ""))
+        if article_price <= file.desired_price[row]:
+            alert_message = "*****BUY NOW: " + article_title + " ************"
+            print(alert_message)
+        print(article_title, ": ", article_price)
+
+        with open("search_results.csv", 'a', newline='') as f:
+            w = csv.writer(f, dialect='excel')
+            result = [article_title, str(article_price), str(lookup_time), alert_message]
+            w.writerow(result)
+    except:
+        print("Price of this article was not found")
+        with open("search_results.csv", 'a', newline='') as f:
+            w = csv.writer(f, dialect='excel')
+            w.writerow([article_title, '', '', "item price not found!"])
+
 
 file = pd.read_csv('items_list.csv', sep=',')
 urls = file.url
