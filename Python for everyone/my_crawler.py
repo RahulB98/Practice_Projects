@@ -10,7 +10,4 @@ url = input('Enter - ')
 
 link = urllib.request.urlopen(url).read()
 soup = BeautifulSoup(link, 'html.parser')
-
-tags = soup('td')
-for tag in tags:
-    print(tag.get('class', None))
+print(soup.prettify())
