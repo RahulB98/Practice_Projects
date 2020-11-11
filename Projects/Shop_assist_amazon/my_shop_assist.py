@@ -54,5 +54,5 @@ def get_price():
             with open("search_results.csv", 'a', newline='') as f:
                 w = csv.writer(f, dialect='excel')
                 w.writerow([article_title, 'NA', str(lookup_time), "item price not found!"])
-                
+
 get_price()
