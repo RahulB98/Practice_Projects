@@ -2,7 +2,7 @@ import os
 from twilio.rest import Client
 
 client = Client()
-
+print(os.environ['MY_PHONE_NUMBER'])
 from_whatsapp_number = 'whatsapp:+14155238886'
 to_whatsapp_number = 'whatsapp:' + os.environ['MY_PHONE_NUMBER']
 

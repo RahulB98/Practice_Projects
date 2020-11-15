@@ -1,8 +1,8 @@
 import os
 import smtplib
 
-EMAIL_ADDRESS = os.environ.get('GMAIL_ID')
-EMAIL_PASSWORD = os.environ.get('GMAIL_ID_PASSWORD')
+EMAIL_ADDRESS = os.environ['GMAIL_ID']
+EMAIL_PASSWORD = os.environ['GMAIL_ID_PASSWORD']
 
 with smtplib.SMTP('smtp.gmail.com', 587) as smtp:
     smtp.ehlo()

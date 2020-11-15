@@ -4,6 +4,18 @@ import ssl
 import pandas as pd
 import time
 import csv
+import os
+from twilio.rest import Client
+
+def whatsapp_alert(alert):
+    client = Client()
+    print(os.environ['MY_PHONE_NUMBER'])
+    from_whatsapp_number = 'whatsapp:+14155238886'
+    to_whatsapp_number = 'whatsapp:' + os.environ['MY_PHONE_NUMBER']
+
+    client.messages.create(body=alert,
+                           from_=from_whatsapp_number,
+                           to=to_whatsapp_number)
 
 def get_price():
     file = pd.read_csv('items_list.csv', sep=',')
@@ -40,7 +52,8 @@ def get_price():
         if price != None:
             article_price = float(price[1].replace(",", ""))
             if article_price <= file.desired_price[row]:
-                alert_message = "*****BUY NOW: " + article_title + " ************"
+                alert_message = "*****BUY NOW: " + article_title + " at Rs." + str(article_price) + " *****"
+                whatsapp_alert(alert_message)
                 print(alert_message)
             else:
                 alert_message = "NA"
