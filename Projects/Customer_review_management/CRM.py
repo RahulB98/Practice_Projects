@@ -1,8 +1,9 @@
 from tkinter import *
-from PIL import ImageTk, Image
+import os
 import mysql.connector
 import csv
 from tkinter import ttk
+
 
 root = Tk()
 root.title('CRM app')
@@ -13,7 +14,7 @@ root.geometry("400x600")
 mydb = mysql.connector.connect(
     host="localhost",
     user="root",
-    passwd="rahul987",
+    passwd=str(os.environ.get('MY_PASSWORD')),
     auth_plugin='mysql_native_password'
 )
 
