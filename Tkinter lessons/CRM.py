@@ -289,7 +289,7 @@ def search_customer():
     drop.grid(row=0, column=2, padx=2)
 
 #create a LABEL
-title_label = Label(root, text="YOUR WARDROBE Customer Database", font=('Helvetica', 16))
+title_label = Label(root, text="Customer Database Management", font=('Helvetica', 16))
 title_label.grid(row=0, column=0, columnspan=2, pady=10)
 
 #create MAIN FORM to enter customer data

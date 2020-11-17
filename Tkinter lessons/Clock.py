@@ -4,7 +4,7 @@ import time
 root = Tk()
 root.title('CRM app')
 root.iconbitmap('C:/Users/messi/Downloads/favicon.ico')
-root.geometry("400x400")
+root.geometry("400x150")
 
 def clock():
     hour = time.strftime("%I")
