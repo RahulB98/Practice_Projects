@@ -238,10 +238,3 @@ def main(window, dimensions):
     pygame.quit()
 
 main(window, dimensions)
-
-
-
-    
-    
-
-
